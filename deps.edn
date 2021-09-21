@@ -1,5 +1,6 @@
 {:deps
- {nrepl/nrepl {:local/root "/home/arne/github/nrepl"}
-  lambdaisland/funnel-client {:local/root "/home/arne/github/lambdaisland/funnel-client"}
+ {
+  nrepl/nrepl {:mvn/version "0.9.0-beta2"}
+  ;;  lambdaisland/funnel-client {:mvn/version "0.0.13"}
   commons-io/commons-io {:mvn/version "2.11.0"}
   }}

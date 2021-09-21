@@ -6,7 +6,7 @@
 (lioss/main
  {:license          :mpl
   :inception-year   2021
-  :description      "Proxy server for debuggin nREPL"
+  :description      "Proxy server for debugging nREPL interactions"
   :group-id         "com.lambdaisland"})
 
 ;; Local Variables:

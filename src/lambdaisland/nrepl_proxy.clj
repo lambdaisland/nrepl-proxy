@@ -2,7 +2,7 @@
   (:require [nrepl.transport :as transport]
             [nrepl.socket :as socket]
             [nrepl.bencode :as bencode]
-            [lambdaisland.funnel-client :as funnel]
+            #_[lambdaisland.funnel-client :as funnel]
             [clojure.java.io :as io]
             [clojure.walk :as walk])
   (:import (org.apache.commons.io.input TeeInputStream)
@@ -41,28 +41,31 @@
 (def output-stream (memfn ^Socket getOutputStream))
 
 (defn on-send [msg]
-  (println
-   (when (:session msg)
-     (char (+ (long \A) (mod (hash (str (:session msg))) 26))))
-   '--->
-   (:id msg)
-   (:op msg)
-   (pr-str (cond-> (dissoc msg :id :op :session)
-             (:content msg)
-             (update :content (fn [c] (str "<" (count c) " chars>")))))))
+  (locking *out*
+    (println
+     (when (:session msg)
+       (char (+ (long \A) (mod (hash (str (:session msg))) 26))))
+     '--->
+     (:id msg)
+     (:op msg)
+     (pr-str (cond-> (dissoc msg :id :op :session)
+               (:content msg)
+               (update :content (fn [c] (str "<" (count c) " chars>"))))))))
 
 (defn on-receive [msg]
-  (println (when (:session msg)
-             (char (+ (long \A) (mod (hash (str (:session msg))) 26))))
-           (cond
-             (:done (:status msg))
-             '<===
-             (:error (:status msg))
-             '<***
-             :else
-             '<---) (:id msg) (:status msg) (pr-str (cond-> (dissoc msg :id :status :session)
-                                                      (:changed-namespaces msg)
-                                                      (update :changed-namespaces keys)))))
+  (let [msg (update msg :status #(into #{} (map keyword) %))]
+    (locking *out*
+      (println (when (:session msg)
+                 (char (+ (long \A) (mod (hash (str (:session msg))) 26))))
+               (cond
+                 (:done (:status msg))
+                 '<===
+                 (:error (:status msg))
+                 '<***
+                 :else
+                 '<---) (:id msg) (:status msg) (pr-str (cond-> (dissoc msg :id :status :session)
+                                                          (:changed-namespaces msg)
+                                                          (update :changed-namespaces keys)))))))
 
 (defn start [{:keys [port attach]}]
   (let [proxy (socket/inet-socket "0.0.0.0" port)]
