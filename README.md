@@ -33,7 +33,7 @@ Y <=== 4 #{:done} {}
 
 The initial letter indicates the session, arrows to the right are messages sent
 to the server, arrows coming back are responses. Responses marked as `:done` get
-a thick arrow, `:error` responses get a `<***` error.
+a thick arrow, `:error` responses get a `<***` arrow.
 
 Then you get the message id, the `:op` for sent messages, or the `:status` flags
 for returning messages, and then the map with other keys.
