@@ -4,10 +4,11 @@
   (:require [lioss.main :as lioss]))
 
 (lioss/main
- {:license          :mpl
-  :inception-year   2021
-  :description      "Proxy server for debugging nREPL interactions"
-  :group-id         "com.lambdaisland"})
+ {:license           :mpl
+  :inception-year    2021
+  :description       "Proxy server for debugging nREPL interactions"
+  :version-qualifier "alpha"
+  :group-id          "com.lambdaisland"})
 
 ;; Local Variables:
 ;; mode:clojure

@@ -82,6 +82,8 @@
           (try
             (while true
               (on-send (read-bencode downlink down-in-tee)))
+            (catch SocketException e
+              (println (.getMessage e)))
             (catch Throwable t
               (println t)
               (.printStackTrace t))))
@@ -89,6 +91,8 @@
           (try
             (while true
               (on-receive (read-bencode uplink up-in-tee)))
+            (catch SocketException e
+              (println (.getMessage e)))
             (catch Throwable t
               (println t)
               (.printStackTrace t))))))))
