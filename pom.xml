@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.lambdaisland</groupId>
   <artifactId>nrepl-proxy</artifactId>
-  <version>0.1.4-alpha</version>
+  <version>0.2.8-alpha</version>
   <name>nrepl-proxy</name>
   <description>Proxy server for debugging nREPL interactions</description>
   <url>https://github.com/lambdaisland/nrepl-proxy</url>
@@ -25,7 +25,7 @@
     <url>https://github.com/lambdaisland/nrepl-proxy</url>
     <connection>scm:git:git://github.com/lambdaisland/nrepl-proxy.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/lambdaisland/nrepl-proxy.git</developerConnection>
-    <tag>33b8977034f7ed4277f42937bfa8e30d8fdad767</tag>
+    <tag>81aa68c858ea41336e0b5bcbba9b5a2626cd3ea4</tag>
   </scm>
   <dependencies>
     <dependency>
@@ -40,6 +40,12 @@
     </dependency>
   </dependencies>
   <build>
+    <sourceDirectory>src</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src</directory>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -57,7 +63,7 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <git-revision>33b8977034f7ed4277f42937bfa8e30d8fdad767</git-revision>
+              <git-revision>81aa68c858ea41336e0b5bcbba9b5a2626cd3ea4</git-revision>
             </manifestEntries>
           </archive>
         </configuration>
