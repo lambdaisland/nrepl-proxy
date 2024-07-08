@@ -8,8 +8,15 @@ Proxy server for debugging nREPL
 
 ## Usage
 
+Running inside this project or in a project where lambdaisland.nrepl-proxy
+has been added to deps.edn:
 ```
 clojure -X lambdaisland.nrepl-proxy/start :port 1234 :attach 5678
+```
+
+Running if from anywhere:
+```
+clojure -Sdeps '{:deps {com.lambdaisland/nrepl-proxy {:mvn/version "0.2.8-alpha"}}}' -X lambdaisland.nrepl-proxy/start :port 1234 :attach 5678
 ```
 
 This will listen for incoming connections on port 1234, and will connect through
